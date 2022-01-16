@@ -1,19 +1,29 @@
-import GridLayout from "react-grid-layout";
+import { useState } from "react";
+import RGL, { WidthProvider, Responsive } from "react-grid-layout";
 
-const layout = [
+const GridLayout = WidthProvider(RGL);
+
+const startingLayout: RGL.Layout[] = [
     { i: "a", x: 0, y: 0, w: 1, h: 2 },
-    { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+    { i: "b", x: 1, y: 0, w: 3, h: 2 },
     { i: "c", x: 4, y: 0, w: 1, h: 2 },
 ];
 
 const DMScreen = () => {
+    const [layout, setLayout] = useState(startingLayout);
+
+    const onLayoutChange = (layout: RGL.Layout[]) => {
+        setLayout(layout);
+    };
+
     return (
         <GridLayout
+            className="h-full"
             layout={layout}
-            cols={6}
+            onLayoutChange={onLayoutChange}
+            cols={12}
             rowHeight={30}
-            width={1200}
-            isResizable
+            isBounded
         >
             <div key="a" className="bg-slate-200 rounded-sm">
                 a
