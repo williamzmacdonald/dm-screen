@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
 const typographyConfig = {
-    sm: "text-slate-100 text-sm",
-    md: "text-slate-100 text-md",
-    lg: "text-slate-100 text-lg",
-    xl: "text-slate-100 text-xl font-bold",
-    xxl: "text-slate-100 text-2xl font-bold",
+    sm: "text-sm",
+    md: "text-md",
+    lg: "text-lg",
+    xl: "text-xl font-bold",
+    xxl: "text-2xl font-bold",
 };
 
 interface TypographyProps {

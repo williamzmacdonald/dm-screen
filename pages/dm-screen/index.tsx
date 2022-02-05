@@ -1,17 +1,19 @@
 import { useState } from "react";
 import RGL, { WidthProvider, Responsive } from "react-grid-layout";
-import { DMWidget } from "../../components/DMWidget";
+import { DragAndDropWidget } from "../../components/widgets/DragAndDropWidget";
 import { Sidebar } from "../../components/Sidebar";
 import { Typography } from "../../components/Typography";
+import { DMWidget } from "../../components/widgets/DMWidget";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+export interface DroppingItem {
+    i: string;
+    w: number;
+    h: number;
+}
 
 const startingLayout: RGL.Layouts = {
-    lg: [
-        { i: "a", x: 0, y: 0, w: 1, h: 2 },
-        { i: "b", x: 1, y: 0, w: 3, h: 2 },
-        { i: "c", x: 4, y: 0, w: 1, h: 2 },
-    ],
+    lg: [{ i: "a", x: 0, y: 0, w: 1, h: 2 }],
 };
 
 const DMScreen = () => {
@@ -35,26 +37,11 @@ const DMScreen = () => {
 
     const widgets = (
         <>
-            <DMWidget
-                onDragStart={() =>
-                    setDroppingItem({ i: "notes" + Math.random(), h: 2, w: 2 })
-                }
-            >
-                <Typography className="text-slate-900">Notes</Typography>
-            </DMWidget>
-            <DMWidget
-                onDragStart={() =>
-                    setDroppingItem({
-                        i: "npc-generator" + Math.random(),
-                        h: 2,
-                        w: 2,
-                    })
-                }
-            >
-                <Typography className="text-slate-900">
-                    NPC Generator
-                </Typography>
-            </DMWidget>
+            <DragAndDropWidget onDragStart={setDroppingItem} type="notes" />
+            <DragAndDropWidget
+                onDragStart={setDroppingItem}
+                type="npcGenerator"
+            />
         </>
     );
 
@@ -73,8 +60,8 @@ const DMScreen = () => {
                 droppingItem={droppingItem}
             >
                 {layouts.lg.map((layout) => (
-                    <div key={layout.i} className="bg-slate-200 rounded-sm">
-                        {layout.i}
+                    <div key={layout.i}>
+                        <DMWidget type="notes" />
                     </div>
                 ))}
             </ResponsiveReactGridLayout>
