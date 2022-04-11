@@ -13,12 +13,12 @@ export interface DroppingItem {
 }
 
 const startingLayout: RGL.Layouts = {
-    lg: [{ i: "a", x: 0, y: 0, w: 1, h: 2 }],
+    lg: [{ i: "notes1", x: 0, y: 0, w: 1, h: 2 }],
 };
 
 const DMScreen = () => {
     const [layouts, setLayouts] = useState(startingLayout);
-    const [droppingItem, setDroppingItem] = useState({ i: "", w: 2, h: 2 });
+    const [droppingItem, setDroppingItem] = useState<DroppingItem>();
 
     // const onLayoutChange = (
     //     currentLayout: RGL.Layout[],
@@ -32,6 +32,7 @@ const DMScreen = () => {
                 ...layouts,
                 lg: layout,
             });
+            setDroppingItem(undefined);
         }
     };
 
@@ -45,6 +46,7 @@ const DMScreen = () => {
         </>
     );
 
+    console.log(layouts.lg, droppingItem);
     return (
         <div className="flex h-full">
             <Sidebar>{widgets}</Sidebar>
@@ -61,7 +63,13 @@ const DMScreen = () => {
             >
                 {layouts.lg.map((layout) => (
                     <div key={layout.i}>
-                        <DMWidget type="notes" />
+                        <DMWidget
+                            type={
+                                layout.i.startsWith("notes")
+                                    ? "notes"
+                                    : "npcGenerator"
+                            }
+                        />
                     </div>
                 ))}
             </ResponsiveReactGridLayout>

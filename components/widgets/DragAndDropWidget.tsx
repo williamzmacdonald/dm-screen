@@ -6,11 +6,11 @@ import { NPCGenerator } from "./NPCGenerator";
 export const widgets = {
     notes: {
         component: <Notes />,
-        layout: { i: "notes" + Math.random(), h: 2, w: 2 },
+        layout: () => ({ i: "notes" + Math.random(), h: 2, w: 2 }),
     },
     npcGenerator: {
         component: <NPCGenerator />,
-        layout: { i: "npcGenerator" + Math.random(), h: 2, w: 2 },
+        layout: () => ({ i: "npcGenerator" + Math.random(), h: 2, w: 2 }),
     },
 };
 
@@ -26,7 +26,7 @@ export const DragAndDropWidget = ({
             className="p-5 bg-slate-200 m-10"
             draggable={true}
             unselectable="on"
-            onDragStart={() => onDragStart(widgets[type].layout)}
+            onDragStart={() => onDragStart(widgets[type].layout())}
         >
             {widgets[type].component}
         </div>
