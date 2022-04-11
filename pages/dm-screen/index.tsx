@@ -13,7 +13,7 @@ export interface DroppingItem {
 }
 
 const startingLayout: RGL.Layouts = {
-    lg: [{ i: "notes1", x: 0, y: 0, w: 1, h: 2 }],
+    lg: [{ i: "notes1", x: 0, y: 0, w: 1, h: 4 }],
 };
 
 const DMScreen = () => {

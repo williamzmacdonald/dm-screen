@@ -23,12 +23,12 @@ export const DragAndDropWidget = ({
 }) => {
     return (
         <div
-            className="p-5 bg-slate-200 m-10"
+            className="text-center w-full h-24 bg-slate-200 mb-10"
             draggable={true}
             unselectable="on"
             onDragStart={() => onDragStart(widgets[type].layout())}
         >
-            {widgets[type].component}
+            {type}
         </div>
     );
 };
