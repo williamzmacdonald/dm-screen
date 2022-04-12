@@ -43,6 +43,7 @@ export const Notes = () => {
                         <Tab
                             key={note.id}
                             as="input"
+                            type="text"
                             className={({ selected }) =>
                                 classNames(
                                     "w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg text-center",
@@ -83,6 +84,7 @@ export const Notes = () => {
                                     changeNote(e.target.value, note.id, "body")
                                 }
                                 className="resize-none w-full h-full"
+                                onMouseDown={(e) => e.stopPropagation()}
                             />
                         </Tab.Panel>
                     ))}

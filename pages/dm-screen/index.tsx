@@ -13,7 +13,7 @@ export interface DroppingItem {
 }
 
 const startingLayout: RGL.Layouts = {
-    lg: [{ i: "notes1", x: 0, y: 0, w: 1, h: 4 }],
+    lg: [{ i: "notes" + Math.random(), x: 0, y: 0, w: 2, h: 6 }],
 };
 
 const DMScreen = () => {
@@ -41,7 +41,7 @@ const DMScreen = () => {
             <DragAndDropWidget onDragStart={setDroppingItem} type="notes" />
             <DragAndDropWidget
                 onDragStart={setDroppingItem}
-                type="npcGenerator"
+                type="rollableTable"
             />
         </>
     );
@@ -67,7 +67,7 @@ const DMScreen = () => {
                             type={
                                 layout.i.startsWith("notes")
                                     ? "notes"
-                                    : "npcGenerator"
+                                    : "rollableTable"
                             }
                         />
                     </div>
