@@ -33,7 +33,7 @@ export const RollableTable = () => {
                     }
                     className={
                         "shadow w-full box-border p-1 m-0.5 h-6 " +
-                        (result === i ? "bg-red-300" : "bg-transparent")
+                        (result === i ? "bg-red-400" : "bg-transparent")
                     }
                 />
             </div>
@@ -62,7 +62,7 @@ export const RollableTable = () => {
                         <Listbox.Option key={dice} value={dice}>
                             {({ active }) => (
                                 <Typography
-                                    className={`${active && "bg-blue-500"}`}
+                                    className={`${active && "bg-red-500"}`}
                                 >
                                     d{dice}
                                 </Typography>

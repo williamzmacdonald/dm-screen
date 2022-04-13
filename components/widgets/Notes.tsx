@@ -38,7 +38,7 @@ export const Notes = () => {
     return (
         <div className="h-full p-2">
             <Tab.Group>
-                <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl h-1/4">
+                <Tab.List className="flex p-1 space-x-1 bg-red-900/20 rounded-xl h-1/4">
                     {notes.map((note) => (
                         <Tab
                             key={note.id}
@@ -46,11 +46,11 @@ export const Notes = () => {
                             type="text"
                             className={({ selected }) =>
                                 classNames(
-                                    "w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg text-center",
-                                    "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60",
+                                    "w-full py-2.5 text-sm leading-5 font-medium text-red-700 rounded-lg text-center",
+                                    "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-red-400 ring-white ring-opacity-60",
                                     selected
                                         ? "bg-white shadow"
-                                        : "text-blue-100 bg-transparent  hover:text-white"
+                                        : "text-red-100 bg-transparent  hover:text-white"
                                 )
                             }
                             value={note.title}
@@ -75,7 +75,7 @@ export const Notes = () => {
                             key={note.id}
                             className={classNames(
                                 "bg-white rounded-xl p-3 h-full",
-                                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
+                                "focus:outline-none focus:ring-2 ring-offset-2 ring-offset-red-400 ring-white ring-opacity-60"
                             )}
                         >
                             <textarea
