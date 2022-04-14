@@ -1,11 +1,14 @@
 import { useState } from "react";
 import RGL, { WidthProvider, Responsive } from "react-grid-layout";
-import { DragAndDropWidget } from "../../components/widgets/DragAndDropWidget";
-import { Sidebar } from "../../components/Sidebar";
-import { Typography } from "../../components/Typography";
-import { DMWidget } from "../../components/widgets/DMWidget";
+import {
+    DMWidget,
+    isWidget,
+    widgets,
+    WidgetSideBar,
+} from "../../components/widgets";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+
 export interface DroppingItem {
     i: string;
     w: number;
@@ -13,13 +16,12 @@ export interface DroppingItem {
 }
 
 const startingLayout: RGL.Layouts = {
-    lg: [{ i: "notes" + Math.random(), x: 0, y: 0, w: 2, h: 6 }],
+    lg: [{ ...widgets.notes.droppingItem(), x: 0, y: 0 }],
 };
 
 const DMScreen = () => {
     const [layouts, setLayouts] = useState(startingLayout);
     const [droppingItem, setDroppingItem] = useState<DroppingItem>();
-
     // const onLayoutChange = (
     //     currentLayout: RGL.Layout[],
     //     allLayouts: RGL.Layouts
@@ -36,22 +38,11 @@ const DMScreen = () => {
         }
     };
 
-    const widgets = (
-        <>
-            <DragAndDropWidget onDragStart={setDroppingItem} type="notes" />
-            <DragAndDropWidget
-                onDragStart={setDroppingItem}
-                type="rollableTable"
-            />
-        </>
-    );
-
-    console.log(layouts.lg, droppingItem);
     return (
         <div className="flex h-full">
-            <Sidebar>{widgets}</Sidebar>
+            <WidgetSideBar onDragStart={setDroppingItem} />
             <ResponsiveReactGridLayout
-                className="h-full w-5/6"
+                className="h-full w-full"
                 layouts={layouts}
                 // onLayoutChange={onLayoutChange}
                 onDrop={onDrop}
@@ -61,17 +52,19 @@ const DMScreen = () => {
                 autoSize
                 droppingItem={droppingItem}
             >
-                {layouts.lg.map((layout) => (
-                    <div key={layout.i}>
-                        <DMWidget
-                            type={
-                                layout.i.startsWith("notes")
-                                    ? "notes"
-                                    : "rollableTable"
-                            }
-                        />
-                    </div>
-                ))}
+                {layouts.lg.map((layout) => {
+                    const type = layout.i.split(":")[0];
+
+                    if (!isWidget(type)) {
+                        return null;
+                    }
+
+                    return (
+                        <div key={layout.i}>
+                            <DMWidget type={type} />
+                        </div>
+                    );
+                })}
             </ResponsiveReactGridLayout>
         </div>
     );

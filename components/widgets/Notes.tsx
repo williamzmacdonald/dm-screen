@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Typography } from "../Typography";
 import { Tab } from "@headlessui/react";
 
 function classNames(...classes: string[]) {
@@ -22,7 +21,6 @@ export const Notes = () => {
         id: string,
         property: "title" | "body"
     ) => {
-        console.log("changing note", value, id);
         let editedNote = notes.find((note) => note.id === id);
         if (!editedNote) {
             return;
@@ -34,7 +32,6 @@ export const Notes = () => {
             )
         );
     };
-    console.log(notes);
     return (
         <div className="h-full p-2">
             <Tab.Group>
@@ -60,12 +57,7 @@ export const Notes = () => {
                             onMouseDown={(
                                 e: React.MouseEvent<HTMLInputElement>
                             ) => e.stopPropagation()}
-                        >
-                            {/* <input
-                                
-                                className=""
-                            /> */}
-                        </Tab>
+                        />
                     ))}
                     <button onClick={addTab}>+</button>
                 </Tab.List>
