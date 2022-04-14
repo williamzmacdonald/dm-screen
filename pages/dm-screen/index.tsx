@@ -1,3 +1,4 @@
+import { Layout, PrismaClient } from "@prisma/client";
 import { useState } from "react";
 import RGL, { WidthProvider, Responsive } from "react-grid-layout";
 import {
@@ -15,11 +16,13 @@ export interface DroppingItem {
     h: number;
 }
 
-const startingLayout: RGL.Layouts = {
-    lg: [{ ...widgets.notes.droppingItem(), x: 0, y: 0 }],
-};
+const DMScreen = ({ initialLayouts }: { initialLayouts: RGL.Layout[] }) => {
+    const startingLayout: RGL.Layouts = {
+        lg: initialLayouts,
+    };
 
-const DMScreen = () => {
+    console.log(initialLayouts);
+
     const [layouts, setLayouts] = useState(startingLayout);
     const [droppingItem, setDroppingItem] = useState<DroppingItem>();
     // const onLayoutChange = (
@@ -71,3 +74,23 @@ const DMScreen = () => {
 };
 
 export default DMScreen;
+
+const prisma = new PrismaClient();
+
+export async function getServerSideProps() {
+    const initialLayouts: RGL.Layout[] = (await prisma.layout.findMany()).map(
+        (layout) => ({
+            i: `${layout.type}:${layout.id}`,
+            h: layout.height,
+            w: layout.width,
+            x: layout.x,
+            y: layout.y,
+        })
+    );
+
+    return {
+        props: {
+            initialLayouts: initialLayouts,
+        },
+    };
+}
