@@ -6,12 +6,12 @@ import { RollableTable } from "./RollableTable";
 export const widgets = {
     notes: {
         component: <Notes />,
-        droppingItem: () => ({ i: "notes:" + Math.random(), h: 6, w: 2 }),
+        droppingItem: () => ({ i: "notes:", h: 6, w: 2 }),
     },
     rollableTable: {
         component: <RollableTable />,
         droppingItem: () => ({
-            i: "rollableTable:" + Math.random(),
+            i: "rollableTable:",
             h: 6,
             w: 2,
         }),
@@ -25,7 +25,7 @@ export const isWidget = (widget: string): widget is Widgets =>
 
 export const DMWidget = ({ type }: { type: Widgets }) => {
     return (
-        <div className="w-full h-full bg-slate-200">
+        <div className="w-full h-full bg-slate-200 p-1">
             {widgets[type].component}
         </div>
     );
