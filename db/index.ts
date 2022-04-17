@@ -49,13 +49,12 @@ if (!global.prisma) {
         fs.writeFile(
             `${tmpdir()}/client-identity.p12`,
             getDecryptedSecret(),
-            "base64",
             (err) => {
                 if (err) return console.log("poop2", err);
             }
         );
-        fs.chmodSync("/tmp/server-ca.pem", 0o777);
-        fs.chmodSync("/tmp/client-identity.p12", 0o777);
+        // fs.chmodSync("/tmp/server-ca.pem", 0o777);
+        // fs.chmodSync("/tmp/client-identity.p12", 0o777);
     }
     global.prisma = new PrismaClient({});
 }
