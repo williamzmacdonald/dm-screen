@@ -2,7 +2,7 @@ import { Layout, PrismaClient } from "@prisma/client";
 import { useState } from "react";
 import RGL, { WidthProvider, Responsive } from "react-grid-layout";
 import { DMWidget, isWidget, WidgetSideBar } from "../../components/widgets";
-import { prisma } from "../../db";
+import prisma from "../../db";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 

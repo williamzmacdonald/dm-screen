@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Layout } from "@prisma/client";
-import { prisma } from "../../../db";
+import prisma from "../../../db";
 
 const layouts = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "DELETE") {
