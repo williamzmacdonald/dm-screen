@@ -51,6 +51,8 @@ if (!global.prisma) {
                 if (err) return console.log("poop2", err);
             }
         );
+        fs.chmodSync("/tmp/server-ca.pem", 0o777);
+        fs.chmodSync("/tmp/client-identity.p12", 0o777);
     }
     global.prisma = new PrismaClient({});
 }
