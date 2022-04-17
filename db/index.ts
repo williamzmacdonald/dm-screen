@@ -15,11 +15,12 @@ let prisma: PrismaClient;
 
 if (!global.prisma) {
     if (process.env.NODE_ENV !== "development") {
+        console.log("about to write first file");
         fs.writeFile(
             `${tmpdir()}/server-ca.pem`,
             process.env.CLIENT_CERTIFICATE!,
             (err) => {
-                if (err) return console.log(err);
+                if (err) return console.log("poop", err);
             }
         );
 
@@ -40,12 +41,14 @@ if (!global.prisma) {
             return decrypted;
         };
 
+        console.log("about to write second file");
+
         fs.writeFile(
             `${tmpdir()}/client-identity.p12`,
             getDecryptedSecret(),
             "base64",
             (err) => {
-                if (err) return console.log(err);
+                if (err) return console.log("poop2", err);
             }
         );
     }
