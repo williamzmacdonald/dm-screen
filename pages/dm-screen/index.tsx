@@ -1,4 +1,4 @@
-import { Layout, PrismaClient } from "@prisma/client";
+import { Layout } from "@prisma/client";
 import { useState } from "react";
 import RGL, { WidthProvider, Responsive } from "react-grid-layout";
 import { DMWidget, isWidget, WidgetSideBar } from "../../components/widgets";
@@ -108,7 +108,7 @@ const DMScreen = ({ initialLayouts }: { initialLayouts: RGL.Layout[] }) => {
         <div className="flex h-full">
             <WidgetSideBar onDragStart={setDroppingItem} />
             <ResponsiveReactGridLayout
-                className="h-full w-full"
+                className="min-h-full w-full"
                 layouts={layouts}
                 onLayoutChange={onLayoutChange}
                 onDrop={onDrop}

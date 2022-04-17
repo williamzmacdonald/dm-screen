@@ -15,18 +15,13 @@ let prisma: PrismaClient;
 
 if (!global.prisma) {
     if (process.env.NODE_ENV !== "development") {
-        console.log("about to write first file");
         fs.writeFile(
             `${tmpdir()}/server-ca.pem`,
             process.env.CLIENT_CERTIFICATE!,
             (err) => {
-                if (err) return console.log("poop", err);
+                if (err) return console.log(err);
             }
         );
-
-        // fs.readFile("/tmp/server-ca.pem", (err, data) => {
-        //     console.log(err, data.toString());
-        // });
 
         const algorithm = "aes-128-cbc";
         const decipher = crypto.createDecipheriv(
@@ -45,24 +40,14 @@ if (!global.prisma) {
             return decrypted;
         };
 
-        console.log(
-            "about to write second file",
-            `${tmpdir()}/client-identity.p12`
-        );
-
         fs.writeFile(
             `${tmpdir()}/client-identity.p12`,
             getDecryptedSecret(),
             "base64",
             (err) => {
-                if (err) return console.log("poop2", err);
+                if (err) return console.log(err);
             }
         );
-        // fs.chmodSync("/tmp/server-ca.pem", 0o777);
-        // fs.chmodSync("/tmp/client-identity.p12", 0o777);
-        fs.readFile("/tmp/client-identity.p12", (err, data) => {
-            console.log(err, data.toString());
-        });
     }
     global.prisma = new PrismaClient({});
 }
