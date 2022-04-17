@@ -24,9 +24,9 @@ if (!global.prisma) {
             }
         );
 
-        fs.readFile("/tmp/server-ca.pem", (err, data) => {
-            console.log(err, data.toString());
-        });
+        // fs.readFile("/tmp/server-ca.pem", (err, data) => {
+        //     console.log(err, data.toString());
+        // });
 
         console.log(
             process.env.CLIENT_IDENTITY_KEY,
@@ -58,6 +58,7 @@ if (!global.prisma) {
         fs.writeFile(
             `${tmpdir()}/client-identity.p12`,
             getDecryptedSecret(),
+            "base64",
             (err) => {
                 if (err) return console.log("poop2", err);
             }
