@@ -41,7 +41,10 @@ if (!global.prisma) {
             return decrypted;
         };
 
-        console.log("about to write second file");
+        console.log(
+            "about to write second file",
+            `${tmpdir()}/client-identity.p12`
+        );
 
         fs.writeFile(
             `${tmpdir()}/client-identity.p12`,
