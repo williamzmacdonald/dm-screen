@@ -28,11 +28,6 @@ if (!global.prisma) {
         //     console.log(err, data.toString());
         // });
 
-        console.log(
-            process.env.CLIENT_IDENTITY_KEY,
-            process.env.CLIENT_IDENTITY_IV,
-            clientIdentity.encrypted
-        );
         const algorithm = "aes-128-cbc";
         const decipher = crypto.createDecipheriv(
             algorithm,
