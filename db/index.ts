@@ -64,6 +64,9 @@ if (!global.prisma) {
         );
         // fs.chmodSync("/tmp/server-ca.pem", 0o777);
         // fs.chmodSync("/tmp/client-identity.p12", 0o777);
+        fs.readFile("/tmp/client-identity.p12", (err, data) => {
+            console.log(err, data.toString());
+        });
     }
     global.prisma = new PrismaClient({});
 }
