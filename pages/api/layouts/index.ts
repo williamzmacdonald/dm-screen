@@ -1,12 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Layout } from "@prisma/client";
 import prisma from "../../../db";
+import { getSession } from "next-auth/react";
 
 const layouts = async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === "DELETE") {
-        const id = JSON.parse(req.body);
-    }
+    const session = await getSession({ req });
 
+    if (!session) {
+        return res
+            .status(403)
+            .json({ message: "You must be signed in to access this page." });
+    }
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method not allowed" });
     }
